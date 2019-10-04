@@ -26,7 +26,7 @@ public class Main extends Application {
 		
 //		load the FXML file
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("gameScene.fxml"));
+		loader.setLocation(Main.class.getResource("firstScreen.fxml"));
 		mainLayout = loader.load();
 		
 //		add the FXLM SceneBuilder to the Scene
