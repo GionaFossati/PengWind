@@ -1,69 +1,14 @@
 package application;
 
-import java.io.IOException;
-
-import com.sun.javafx.logging.Logger;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+
 
 public class Controller {
-//		First Screen Controller ˅˅˅˅
-	    
-		@FXML
-	    private AnchorPane apMain;
-	    @FXML
-	    private Button btnPlay;
-	    @FXML
-	    private Button btnCharacterSelection;
-	    @FXML
-	    private Button btnLevelSelection;
-	    
-	    @FXML
-	    void openCharacterSelector(MouseEvent event) throws IOException {
-	    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("characterSelectScene.fxml"));
-	    	Parent root = fxmlLoader.load();
-	    	Stage stage = new Stage();
-	    	stage.initModality(Modality.APPLICATION_MODAL);
-	    	stage.setOpacity(1);
-	    	stage.setTitle("My New Stage Title");
-	    	stage.setScene(new Scene(root, 450, 450));
-	    	stage.showAndWait();
-	    }
-
-	    @FXML
-	    void openLevelSelection(MouseEvent event) {
-	    	//opener here
-	    }
-
-	    @FXML
-	    void openPlayField(MouseEvent event) throws IOException {
-	    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gameScene.fxml"));
-	    	Parent root = fxmlLoader.load();
-	    	Stage stage = new Stage();
-	    	stage.initModality(Modality.APPLICATION_MODAL);
-	    	stage.setOpacity(1);
-	    	stage.setTitle("My New Stage Title");
-	    	stage.setScene(new Scene(root, 450, 450));
-	    	stage.showAndWait();
-	    }
-	    
-//		Level Selection Controller ˅˅˅˅
-	
-//		Character Selection Controller ˅˅˅˅
-	
 //		GamePlay Controller ˅˅˅˅
 	    
 		@FXML
@@ -89,20 +34,108 @@ public class Controller {
 	    @FXML
 	    private GridPane playField;
 	    
-//	    attach eventHandler to each cell
-		private void addGridEvent() {
-		        playField.getChildren().forEach(item -> {
-		            item.setOnMouseClicked(new EventHandler<MouseEvent>() {
-		                @Override
-		                public void handle(MouseEvent event) {
-		                	System.out.println(item.getProperties());
-		                		 
+//	    listener for keypressed (is in the main AnchorPane)	    
+	    @FXML
+	    void shortcutFunction(KeyEvent event) {
+	    	if (event.getCode() == KeyCode.SPACE) {
+                goOnPressed();
+//                System.out.println("detected");
+            } else if (event.getCode() == KeyCode.C) {
+            	changeDirectionPressed();
+            }
+	    }
+	    
+//	    function that moves penguin and enemies
+	    @FXML
+		public void goOnPressed() {
+								movePenguin();
+//								moveEnemies();
+		}
+	    
+//	    function that triggers the change direction
+	    public Integer[] movementDirection = new Integer[2];
+	    private int[] points = new int[] {
+	              -1, -1,
+	              -1, 0,
+	              -1, 1,
+	              0, -1,
+	              0, 1,
+	              1, -1,
+	              1, 0,
+	              1, 1
+	              };
+	    @FXML
+		public void changeDirectionPressed() {
+			System.out.println("pressed change dir");
+			Integer[] pengCoord = getCoord(penguinUser);
+			 
+			 for (int i = 0; i < points.length; i++) {
+		            int dx = points[i];
+		            int dy = points[++i];
 
-		                }
-		            });
+		            int newX = pengCoord[1] + dx;
+		            int newY = pengCoord[0]+ dy;
 
-		        });
-		    }
+		            Button btn = new Button();
+					 btn.getStyleClass().add("changepossible");
+					 btn.setPrefSize(20, 20);
+					 
+					 // problem: I want to remove buttons but I don't understand how, maybe from fx-id. But, how can i set an fxid to each button?
+//					 if statement used to avoid to add points outside the grid and modify col & row number
+					 if (newX != -1 && newY != -1 && newX != 8 && newY != 8) {
+						 playField.add(btn, newX, newY);
+					 }
+					 
+					 btn.setOnMouseClicked(
+								e -> {
+										movementDirection[0] = dx;
+										movementDirection[1] = dy;
+										removeChangeDirButtons(pengCoord);
+										System.out.println("New movement direction -  Column: " + movementDirection[0] + " Row: " + movementDirection[1]);
+									}
+							
+						);
+			 }	
+	    }
+	    
+	    private void removeChangeDirButtons(Integer[] pengCoord) {
+//				 look at line 83
+	    }
 		
+	    
+		private void movePenguin() {
+			Integer[] pengCoord = getCoord(penguinUser);
+			
+			String INT_X = movementDirection[1].toString();
+			String INT_Y = movementDirection[0].toString();
+			
+			System.out.println("Move – X: " + INT_X + " Y: " + INT_Y);
+			
+			playField.add(penguinUser, pengCoord[1] + Integer.parseInt(INT_X) ,pengCoord[0] + Integer.parseInt(INT_Y));
+			
+		}
+		
+		private Integer[] getCoord(ImageView gridNode) {
+//			coord[0] = row index
+//			coord[1] = column index
+			
+			Integer[] coord = new Integer[2];
+			coord[0] = (Integer) gridNode.getProperties().get("gridpane-row");
+			coord[1] = (Integer) gridNode.getProperties().get("gridpane-column");
+			
+		
+			if (coord[1] == null)  {
+				coord[1] = 0;
+			}
+			
+			if (coord[0] == null)  {
+				coord[0] = 0;
+			}
+			
 
+			System.out.println(coord[0] + " " + coord[1]);
+			
+			return coord;
+		}
+		
 }

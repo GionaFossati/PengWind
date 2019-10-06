@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="800.0" maxWidth="800.0" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="800.0" maxWidth="800.0" onKeyPressed="#shortcutFunction" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <children>
       <GridPane fx:id="playField" gridLinesVisible="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -67,7 +67,7 @@
                   <Image url="@../../res/shark.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="icebergTwo" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="5">
+            <ImageView fx:id="icebergThree" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="5">
                <image>
                   <Image url="@../../res/iceberg.jpeg" />
                </image>
@@ -84,8 +84,8 @@
             </ImageView>
          </children>
       </GridPane>
-      <Button fx:id="btnGoOn" layoutX="452.0" layoutY="759.0" mnemonicParsing="false" text="Go on (Space)" />
-      <Button fx:id="btnChangeMove" layoutX="242.0" layoutY="759.0" mnemonicParsing="false" text="Change Move Direction (C)" />
+      <Button fx:id="btnGoOn" layoutX="452.0" layoutY="759.0" mnemonicParsing="false" onMouseClicked="#goOnPressed" text="Go on (Space)" />
+      <Button fx:id="btnChangeMove" layoutX="242.0" layoutY="759.0" mnemonicParsing="false" onMouseClicked="#changeDirectionPressed" text="Change Move Direction (C)" />
       <Button layoutX="705.0" layoutY="759.0" mnemonicParsing="false" text="End Game" />
    </children>
 </AnchorPane>
