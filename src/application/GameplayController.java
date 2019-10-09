@@ -1,6 +1,7 @@
 package application;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -8,7 +9,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
 
-public class Controller {
+public class GameplayController {
 //		GamePlay Controller ˅˅˅˅
 	    
 		@FXML
@@ -39,7 +40,6 @@ public class Controller {
 	    void shortcutFunction(KeyEvent event) {
 	    	if (event.getCode() == KeyCode.SPACE) {
                 goOnPressed();
-//                System.out.println("detected");
             } else if (event.getCode() == KeyCode.C) {
             	changeDirectionPressed();
             }
@@ -92,17 +92,42 @@ public class Controller {
 										movementDirection[1] = dy;
 										removeChangeDirButtons(pengCoord);
 										System.out.println("New movement direction -  Column: " + movementDirection[0] + " Row: " + movementDirection[1]);
-									}
+								
+								}
 							
 						);
 			 }	
 	    }
 	    
 	    private void removeChangeDirButtons(Integer[] pengCoord) {
-//				 look at line 83
+//				 System.out.println("pressed change dir");
+			 
+			 for (int i = 0; i < points.length; i++) {
+		            int dx = points[i];
+		            int dy = points[++i];
+
+		            int newX = pengCoord[1] + dx;
+		            int newY = pengCoord[0]+ dy;
+		            
+		            if (newX != -1 && newY != -1 && newX != 8 && newY != 8) {
+//		            	   Node buttonNode = getNodeFromField(newY,newX);
+//				           System.out.println(buttonNode);
+//				           playField.getChildren().removeAll(buttonNode);
+					 }
+		           
+			 }
 	    }
 		
-	    
+		  
+//		 private Node getNodeFromField(int row, int col) {
+//			    for (Node node : playField.getChildren()) {
+//			        if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+//			            return node;
+//			        }
+//			    }
+//			    return null;
+//			}
+		 
 		private void movePenguin() {
 			Integer[] pengCoord = getCoord(penguinUser);
 			
@@ -110,8 +135,9 @@ public class Controller {
 			String INT_Y = movementDirection[0].toString();
 			
 			System.out.println("Move – X: " + INT_X + " Y: " + INT_Y);
+			playField.getChildren().remove(penguinUser);
+			playField.add(penguinUser, pengCoord[1] + Integer.parseInt(INT_Y) ,pengCoord[0] + Integer.parseInt(INT_X));
 			
-			playField.add(penguinUser, pengCoord[1] + Integer.parseInt(INT_X) ,pengCoord[0] + Integer.parseInt(INT_Y));
 			
 		}
 		

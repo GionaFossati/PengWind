@@ -12,7 +12,7 @@ public class Main extends Application {
 	private Stage primaryStage;
 	private AnchorPane mainLayout;
 	private Scene scene;
-	private Controller c = new Controller();
+	private GameplayController c = new GameplayController();
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
