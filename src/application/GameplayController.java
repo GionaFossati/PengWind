@@ -113,7 +113,7 @@ public class GameplayController {
 	    
 	    private boolean canMove (int Y, int X) {
 	    	 boolean response;
-	    	 if (X != -1 && Y != -1 && X <= 10 && Y <= 8) {
+	    	 if (X != -1 && Y != -1 && X < 10 && Y < 8) {
 				 response = true;
 			 } else {
 				 response = false;
@@ -131,16 +131,15 @@ public class GameplayController {
 		private void movePenguin() {
 			Integer[] pengCoord = getCoord(penguinUser);
 			
-//			String INT_X = movementDirection[1].toString();
-//			String INT_Y = movementDirection[0].toString();
+			Integer newX = pengCoord[1] + movementDirection[1];
+			Integer newY = pengCoord[0] + movementDirection[0];
 			
-			Integer newX = pengCoord[0] + movementDirection[1];
-			Integer newY = pengCoord[1] + movementDirection[0];
+			System.out.println("new X=" +newX);
+			System.out.println("new Y=" + newY);
 			
 			if (canMove(newY, newX)) {
-	//			System.out.println("Move – X: " + INT_X + " Y: " + INT_Y);
 				playField.getChildren().remove(penguinUser);
-				playField.add(penguinUser, newY , newX);
+				playField.add(penguinUser, newY, newX);
 			
 			} else {
 				System.out.println("I don't move otherwise you will go out of bounds!");
@@ -149,14 +148,13 @@ public class GameplayController {
 		}
 		
 		private Integer[] getCoord(ImageView gridNode) {
-//			coord[0] = row index
-//			coord[1] = column index
+//			cord[0] = row index --> Y
+//			cord[1] = column index --> X
 			
 			Integer[] coord = new Integer[2];
 			coord[0] = (Integer) gridNode.getProperties().get("gridpane-row");
 			coord[1] = (Integer) gridNode.getProperties().get("gridpane-column");
 			
-		
 			if (coord[1] == null)  {
 				coord[1] = 0;
 			}
