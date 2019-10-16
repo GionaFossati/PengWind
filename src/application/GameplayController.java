@@ -84,18 +84,15 @@ public class GameplayController {
 			Integer[] pengCoord = getCoord(penguinUser);
 			 
 			for (int i = 0; i < points.length; i++) {
-		            int dx = points[i];
-		            int dy = points[++i];
+		            int dy = points[i];
+		            int dx = points[++i];
 
 		            int newX = pengCoord[1] + dx;
 		            int newY = pengCoord[0]+ dy;
 		            
-					 // problem: I want to remove buttons but I don't understand how, maybe from fx-id. But, how can i set an fxid to each button?
-//					 if statement used to avoid to add points outside the grid and modify col & row number
 					 if (canMove(newY,newX)) {
 						 playField.add(btnMovement.get(i), newX, newY);
 					 }
-					 
 					 
 					 
 					 btnMovement.get(i).setOnMouseClicked(
@@ -103,7 +100,7 @@ public class GameplayController {
 										movementDirection[0] = dy;
 										movementDirection[1] = dx;
 										removeChangeDirButtons(pengCoord);
-										System.out.println("New movement direction -  Column: " + movementDirection[0] + " Row: " + movementDirection[1]);
+										System.out.println("New movement direction -  X: " + movementDirection[0] + " Y: " + movementDirection[1]);
 										
 								}
 							
@@ -112,14 +109,24 @@ public class GameplayController {
 	    }
 	    
 	    private boolean canMove (int Y, int X) {
-	    	 boolean response;
+	    	boolean response;
 	    	 if (X != -1 && Y != -1 && X < 10 && Y < 8) {
 				 response = true;
 			 } else {
 				 response = false;
 			 }
+	    	 
 	    	return response;
 	    }
+	    
+	    private Node getNodeFromPlayField(int Y, int X) {
+		    for (Node node : playField.getChildren()) {
+		        if (GridPane.getColumnIndex(node) == X && GridPane.getRowIndex(node) == Y) {
+		            return node;
+		        }
+		    }
+		    return null;
+		}
 	    
 	    private void removeChangeDirButtons(Integer[] pengCoord) {
 		    	for (Button btn : btnMovement) {
@@ -136,6 +143,7 @@ public class GameplayController {
 			
 			System.out.println("new X=" + newX);
 			System.out.println("new Y=" + newY);
+			System.out.println("Movement direction -  X: " + movementDirection[0] + " Y: " + movementDirection[1]);
 			
 			if (canMove(newY, newX)) {
 				playField.getChildren().remove(penguinUser);
