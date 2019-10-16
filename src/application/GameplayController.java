@@ -100,8 +100,8 @@ public class GameplayController {
 					 
 					 btnMovement.get(i).setOnMouseClicked(
 								e -> {
-										movementDirection[0] = dx;
-										movementDirection[1] = dy;
+										movementDirection[0] = dy;
+										movementDirection[1] = dx;
 										removeChangeDirButtons(pengCoord);
 										System.out.println("New movement direction -  Column: " + movementDirection[0] + " Row: " + movementDirection[1]);
 										
@@ -131,10 +131,10 @@ public class GameplayController {
 		private void movePenguin() {
 			Integer[] pengCoord = getCoord(penguinUser);
 			
-			Integer newX = pengCoord[1] + movementDirection[1];
-			Integer newY = pengCoord[0] + movementDirection[0];
+			Integer newY = pengCoord[1] + movementDirection[1];
+			Integer newX = pengCoord[0] + movementDirection[0];
 			
-			System.out.println("new X=" +newX);
+			System.out.println("new X=" + newX);
 			System.out.println("new Y=" + newY);
 			
 			if (canMove(newY, newX)) {
