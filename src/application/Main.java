@@ -7,11 +7,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
 	private Stage primaryStage;
-	private BorderPane mainLayout;
+	private AnchorPane mainLayout;
 	private Scene scene;
 	private GameplayController c = new GameplayController();
 	
@@ -28,7 +29,7 @@ public class Main extends Application {
 		
 //		load the FXML file
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("/application/views/characterSelect_FirstScene.fxml"));
+		loader.setLocation(Main.class.getResource("/application/views/gameScene.fxml"));
 		mainLayout = loader.load();
 		
 //		add the FXLM SceneBuilder to the Scene
