@@ -36,7 +36,7 @@
          <children>
             <ImageView fx:id="familyGroup" fitHeight="150.0" fitWidth="177.0" pickOnBounds="true" preserveRatio="true" translateX="-80.0" translateY="6.0" GridPane.columnIndex="8">
                <image>
-                  <Image url="@../../res/family.png" />
+                  <Image url="@../../../res/family.png" />
                </image>
                <GridPane.margin>
                   <Insets />
@@ -44,42 +44,42 @@
             </ImageView>
             <ImageView fx:id="penguinUser" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="7">
                <image>
-                  <Image url="@../../res/penguin.png" />
+                  <Image url="@../../../res/penguin.png" />
                </image>
             </ImageView>
             <ImageView fx:id="sharkOne" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../res/shark.png" />
+                  <Image url="@../../../res/shark.png" />
                </image>
             </ImageView>
             <ImageView fx:id="sharkTwo" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
-                  <Image url="@../../res/shark.png" />
+                  <Image url="@../../../res/shark.png" />
                </image>
             </ImageView>
             <ImageView fx:id="sharkFour" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="7">
                <image>
-                  <Image url="@../../res/shark.png" />
+                  <Image url="@../../../res/shark.png" />
                </image>
             </ImageView>
             <ImageView fx:id="sharkThree" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="6">
                <image>
-                  <Image url="@../../res/shark.png" />
+                  <Image url="@../../../res/shark.png" />
                </image>
             </ImageView>
             <ImageView fx:id="icebergThree" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../../res/iceberg.jpeg" />
+                  <Image url="@../../../res/iceberg.jpeg" />
                </image>
             </ImageView>
             <ImageView fx:id="icebergTwo" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../res/iceberg.jpeg" />
+                  <Image url="@../../../res/iceberg.jpeg" />
                </image>
             </ImageView>
             <ImageView fx:id="icebergOne" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../res/iceberg.jpeg" />
+                  <Image url="@../../../res/iceberg.jpeg" />
                </image>
             </ImageView>
          </children>
