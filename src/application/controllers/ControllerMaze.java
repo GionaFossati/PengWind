@@ -43,6 +43,7 @@ public class ControllerMaze {
 	void shortcutFunction(KeyEvent event) {
 		if (event.getCode() == KeyCode.SPACE) {
 			goOnPressed();
+			btnChangeMove.setDisable(false);
 		} else if (event.getCode() == KeyCode.C) {
 			changeDirectionPressed();
 			btnChangeMove.setDisable(true);
@@ -54,6 +55,7 @@ public class ControllerMaze {
 	public void goOnPressed() {
 		movePenguin();
 //								moveEnemies();
+		btnChangeMove.setDisable(false);
 	}
 
 //	    function that triggers the change direction
@@ -62,6 +64,7 @@ public class ControllerMaze {
 
 	@FXML
 	public void changeDirectionPressed() {
+		btnChangeMove.setDisable(true);
 		System.out.println("pressed change dir");
 		btnMovement = new ArrayList<Button>();
 
