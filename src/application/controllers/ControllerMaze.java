@@ -38,23 +38,28 @@ public class ControllerMaze {
 	@FXML
 	private GridPane playField;
 
-//	    listener for keypressed (is in the main AnchorPane)	    
 	@FXML
-	void shortcutFunction(KeyEvent event) {
-		if (event.getCode() == KeyCode.SPACE) {
-			goOnPressed();
-			btnChangeMove.setDisable(false);
-		} else if (event.getCode() == KeyCode.C) {
-			changeDirectionPressed();
+	void shortcutEvent(KeyEvent event) {
+		System.out.println(event.getCode());
+		switch (event.getCode()) {
+        case C:
+        	changeDirectionPressed();
 			btnChangeMove.setDisable(true);
-		}
+			break;
+        case M:
+        	goOnPressed();
+			btnChangeMove.setDisable(false);
+			break;
+        default:
+            break;
+        }
 	}
 
 //	    function that moves penguin and enemies
 	@FXML
 	public void goOnPressed() {
 		movePenguin();
-//								moveEnemies();
+//		moveEnemies();
 		btnChangeMove.setDisable(false);
 	}
 
@@ -104,6 +109,7 @@ public class ControllerMaze {
 
 	private boolean canMove(int Y, int X) {
 		boolean response;
+		System.out.println(getNodeByRowColumnIndex(Y, X, playField));
 		if (X != -1 && Y != -1 && X < 10 && Y < 8) {
 			response = true;
 		} else {
@@ -120,6 +126,20 @@ public class ControllerMaze {
 			}
 		}
 		return null;
+	}
+
+	public Node getNodeByRowColumnIndex (int Y, int X, GridPane playField) {
+	    Node result = null;
+	    ObservableList<Node> childrens = playField.getChildren();
+//	    System.out.println(childrens);
+//	    for (Node node : childrens) {
+//	        if(GridPane.getRowIndex(node) == null && GridPane.getColumnIndex(node) == null) {
+//	            result =  ;
+//	            break;
+//	        }
+//	    }
+
+	    return result;
 	}
 
 	private void removeChangeDirButtons(Integer[] pengCoord) {
