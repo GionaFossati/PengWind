@@ -23,7 +23,7 @@
                   <Font size="40.0" />
                </font>
             </Label>
-            <Button fx:id="backBtn" layoutX="30.0" layoutY="40.0" mnemonicParsing="false" onAction="#addNavigationHandlers" text="Back" />
+            <Button fx:id="backBtn" layoutX="30.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#backClicked" text="Back" />
          </children>
       </AnchorPane>
    </top>
@@ -54,7 +54,7 @@
                         <Button fx:id="button_green" layoutX="33.0" layoutY="235.0" mnemonicParsing="false" onAction="#changeImageAfterButton" prefHeight="60.0" prefWidth="80.0" text="Green" />
                         <Button fx:id="button_purple" layoutX="158.0" layoutY="235.0" mnemonicParsing="false" onAction="#changeImageAfterButton" prefHeight="60.0" prefWidth="80.0" text="Purple" />
                         <Button fx:id="button_blue" layoutX="282.0" layoutY="235.0" mnemonicParsing="false" onAction="#changeImageAfterButton" prefHeight="60.0" prefWidth="80.0" text="Black" />
-                        <Button fx:id="nextBtn" layoutX="298.0" layoutY="539.0" mnemonicParsing="false" onAction="#addNavigationHandlers" prefHeight="33.0" prefWidth="64.0" text="Next" />
+                        <Button fx:id="nextBtn" layoutX="298.0" layoutY="539.0" mnemonicParsing="false"  onMouseClicked="#nextClicked" prefHeight="33.0" prefWidth="64.0" text="Next" />
                      </children>
                   </AnchorPane>
                </children>

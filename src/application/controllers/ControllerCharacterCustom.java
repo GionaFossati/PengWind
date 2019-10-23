@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 public class ControllerCharacterCustom implements Initializable {
 
@@ -80,34 +81,18 @@ public class ControllerCharacterCustom implements Initializable {
 		}
 	}
 
-	/**
-	 * Adds handlers to back button and continue button.
-	 */
+
 	@FXML
-	private void addNavigationHandlers() {
-		nextBtn.setOnAction(new EventHandler<ActionEvent>() {
+	private void nextClicked(MouseEvent event) {
+		model.setImage(imageView.getImage());
+		Main.goToMazeSelectScene();
+		System.out.print(model.getName());
+	}
+	
+	@FXML
+	private void backClicked(MouseEvent event) {
+		Main.goToCharacterNameScene();
 
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO: get the character name text to the model, and from the model to this
-				// controller
-				// model.setName(textFieldName.getText());
-				
-				//pass the chosen character image to CharacterModel
-				model.setImage(imageView.getImage());
-				Main.goToMazeSelectScene();
-				System.out.print(model.getName());
-			}
-
-		});
-		backBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				Main.goToCharacterNameScene();
-			}
-
-		});
 	}
 
 }
