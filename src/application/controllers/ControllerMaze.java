@@ -1,6 +1,12 @@
 package application.controllers;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.TargetDataLine;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -158,7 +164,7 @@ public class ControllerMaze {
 		System.out.println("new Y=" + newY);
 		System.out.println("Movement direction -  X: " + movementDirection[0] + " Y: " + movementDirection[1]);
 
-		if (canMove(newY, newX)) {
+		if ((canMove(newY, newX) && windDetected() ) == true) {
 			playField.getChildren().remove(penguinUser);
 			playField.add(penguinUser, newY, newX);
 
@@ -188,5 +194,75 @@ public class ControllerMaze {
 
 		return coord;
 	}
+	
+	private boolean windDetected() {
+   	 	ByteArrayOutputStream byteArrayOutputStream;
+        TargetDataLine targetDataLine;
+        int count;
+        boolean stopCapture = false;
+        byte tempBuffer[] = new byte[8000];
+        int countzero, timeInSeconds;    
+        short convert[] = new short[tempBuffer.length];
+        boolean blowDetected = false;
+        
+        try {
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            stopCapture = false;
+            timeInSeconds = 0;
+            
+            System.out.println("Starting microphone detection test...");
+            
+            while (!stopCapture) {
+                AudioFormat audioFormat = new AudioFormat(8000.0F, 16, 1, true, false);
+                DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
+                targetDataLine = (TargetDataLine) AudioSystem.getLine(dataLineInfo);
+                targetDataLine.open(audioFormat);
+                targetDataLine.start();
+                count = targetDataLine.read(tempBuffer, 0, tempBuffer.length);
+                byteArrayOutputStream.write(tempBuffer, 0, count); 
+                
+                try {
+                	
+                	// Byte Size
+                    countzero = 0;
+                    
+                    for (int i = 0; i < tempBuffer.length; i++) {                                     
+                        convert[i] = tempBuffer[i];
+                        
+                        if (convert[i] == 0) {
+                            countzero++;
+                        }
+                        
+                    }
+                     
+                   timeInSeconds++;
+                    
+                    /* Checks if lower than 800 bytes
+                     * 800 bytes is low enough volume to block out unwanted noises
+                     */
+                    if (countzero < 800) {
+                   	 	blowDetected = true;
+                   	 	System.out.println(blowDetected + ": " + countzero + " bytes detected at " + timeInSeconds + " seconds");
+                   	 	break;
+                    } 
+ 
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println(e.getMessage());
+                    return blowDetected;
+                }
+                
+                Thread.sleep(0);
+                targetDataLine.close();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return blowDetected;
+        }
+        
+        return blowDetected;
+        
+   }
+	
+	
 
 }
