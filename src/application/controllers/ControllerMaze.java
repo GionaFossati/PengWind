@@ -10,6 +10,7 @@ import javax.sound.sampled.TargetDataLine;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -43,6 +44,10 @@ public class ControllerMaze {
 	private Button btnChangeMove;
 	@FXML
 	private GridPane playField;
+	
+	public Integer[] movementDirection = new Integer[2];
+	private int[] pointsAroundCell = new int[] { -1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1 };
+
 
 	@FXML
 	void shortcutEvent(KeyEvent event) {
@@ -61,7 +66,7 @@ public class ControllerMaze {
         }
 	}
 
-//	    function that moves penguin and enemies
+//	function that moves penguin and enemies
 	@FXML
 	public void goOnPressed() {
 		movePenguin();
@@ -70,16 +75,13 @@ public class ControllerMaze {
 	}
 
 //	    function that triggers the change direction
-	public Integer[] movementDirection = new Integer[2];
-	private int[] points = new int[] { -1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1 };
-
 	@FXML
 	public void changeDirectionPressed() {
 		btnChangeMove.setDisable(true);
 		System.out.println("pressed change dir");
 		btnMovement = new ArrayList<Button>();
 
-		for (int k = 0; k < points.length; k++) {
+		for (int k = 0; k < pointsAroundCell.length; k++) {
 			Button btn = new Button();
 			btn.getStyleClass().add("changepossible");
 			btn.setPrefSize(20, 20);
@@ -89,15 +91,16 @@ public class ControllerMaze {
 
 		Integer[] pengCoord = getCoord(penguinUser);
 
-		for (int i = 0; i < points.length; i++) {
-			int dy = points[i];
-			int dx = points[++i];
+		for (int i = 0; i < pointsAroundCell.length; i++) {
+			int dy = pointsAroundCell[i];
+			int dx = pointsAroundCell[++i];
 
 			int newX = pengCoord[1] + dx;
 			int newY = pengCoord[0] + dy;
 
 			if (canMove(newY, newX)) {
 				playField.add(btnMovement.get(i), newX, newY);
+				playField.setHalignment(btnMovement.get(i), HPos.CENTER);
 			}
 
 			btnMovement.get(i).setOnMouseClicked(e -> {
@@ -113,10 +116,14 @@ public class ControllerMaze {
 		}
 	}
 
+	
 	private boolean canMove(int Y, int X) {
 		boolean response;
-		System.out.println(getNodeByRowColumnIndex(Y, X, playField));
-		if (X != -1 && Y != -1 && X < 10 && Y < 8) {
+//		controls if it's trying to move out of grid or if there's an iceberg in the next cell 
+		System.out.println("can move in Y: " + Y);
+		System.out.println("can move in X: " + X);
+		
+		if (X != -1 && Y != -1 && X < 11 && Y < 8 && getNodeByRowColumnIndex(Y, X) == null) {
 			response = true;
 		} else {
 			response = false;
@@ -125,25 +132,21 @@ public class ControllerMaze {
 		return response;
 	}
 
-	private Node getNodeFromPlayField(int Y, int X) {
-		for (Node node : playField.getChildren()) {
-			if (GridPane.getColumnIndex(node) == X && GridPane.getRowIndex(node) == Y) {
-				return node;
-			}
-		}
-		return null;
-	}
-
-	public Node getNodeByRowColumnIndex (int Y, int X, GridPane playField) {
+	public Node getNodeByRowColumnIndex (int Y, int X) {
 	    Node result = null;
-	    ObservableList<Node> childrens = playField.getChildren();
-//	    System.out.println(childrens);
-//	    for (Node node : childrens) {
-//	        if(GridPane.getRowIndex(node) == null && GridPane.getColumnIndex(node) == null) {
-//	            result =  ;
-//	            break;
-//	        }
-//	    }
+	    Integer rowIndex = 0;
+	    Integer columnIndex = 0;
+	    ObservableList<Node> children = playField.getChildren();
+	    for (Node node : children) {
+	    	
+	    	rowIndex = GridPane.getRowIndex(node) == null ? 0 : GridPane.getRowIndex(node);
+	    	columnIndex = GridPane.getColumnIndex(node) == null ? 0 : GridPane.getColumnIndex(node);
+	        
+	    	if(rowIndex == Y && columnIndex == X) {
+	            result = node;
+	            break;
+	        } 
+	    }
 
 	    return result;
 	}
@@ -169,7 +172,7 @@ public class ControllerMaze {
 			playField.add(penguinUser, newY, newX);
 
 		} else {
-			System.out.println("I don't move otherwise you will go out of bounds!");
+			System.out.println("I don't move otherwise you will go over smth or out of grid:  " + getNodeByRowColumnIndex(newY, newX) );
 		}
 
 	}
