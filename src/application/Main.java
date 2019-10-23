@@ -12,13 +12,14 @@ public class Main extends Application {
 	private Stage primaryStage;
 	private AnchorPane mainLayout;
 	private Scene scene;
+	private GameplayController c = new GameplayController();
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
-		Controller c = new Controller();
 		primaryStage.setTitle("PengWind");
 		showUI();
+		startGame();
 	}
 	
 //	FXML SceneBuilder Loader
@@ -38,6 +39,11 @@ public class Main extends Application {
 		primaryStage.setResizable(false);
 		
 		primaryStage.show();
+	}
+	
+//	FXML SceneBuilder Loader
+	private void startGame() throws IOException {
+		
 	}
 	
 	public static void main(String[] args) {
