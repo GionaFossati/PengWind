@@ -2,15 +2,16 @@ package application;
 	
 import java.io.IOException;
 
+import application.controllers.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
 	private Stage primaryStage;
-	private AnchorPane mainLayout;
+	private BorderPane mainLayout;
 	private Scene scene;
 	private GameplayController c = new GameplayController();
 	
@@ -27,7 +28,7 @@ public class Main extends Application {
 		
 //		load the FXML file
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("gameScene.fxml"));
+		loader.setLocation(Main.class.getResource("/application/views/characterSelect_FirstScene.fxml"));
 		mainLayout = loader.load();
 		
 //		add the FXLM SceneBuilder to the Scene
