@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 public class ControllerMazeSelect {
 
@@ -15,26 +16,13 @@ public class ControllerMazeSelect {
 	private Button startBtn;
 
 	@FXML
-	private void addNavigationHandlers() {
-		backBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				Main.goToCharacterCustomScene();
-			}
-
-		});
-		
-		startBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				Main.goToMazeScene();
-				
-			}
-			
-		});
-
+	private void backClicked(MouseEvent event) {
+		Main.goToCharacterCustomScene();
 	}
-
+	
+	@FXML
+	private void startClicked(MouseEvent event) {
+		Main.goToMazeScene();
+	}
+	
 }
