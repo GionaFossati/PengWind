@@ -19,10 +19,10 @@ public class ControllerMazeSelect {
 	private void backClicked(MouseEvent event) {
 		Main.goToCharacterCustomScene();
 	}
-	
+
 	@FXML
 	private void startClicked(MouseEvent event) {
 		Main.goToMazeScene();
 	}
-	
+
 }
