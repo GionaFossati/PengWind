@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ControllerCharacterCustom">
+   <top>
+      <AnchorPane prefHeight="120.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="100.0" layoutY="30.0" text="Player: ">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <Label fx:id="characterName" layoutX="241.0" layoutY="30.0" prefHeight="50.0" prefWidth="387.0">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <Button fx:id="backBtn" layoutX="30.0" layoutY="40.0" mnemonicParsing="false" onAction="#addNavigationHandlers" text="Back" />
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.5" prefHeight="666.0" prefWidth="800.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ImageView fx:id="imageView" fitHeight="500.0" fitWidth="360.0" layoutX="19.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <AnchorPane prefHeight="59.0" prefWidth="395.0">
+                     <children>
+                        <Label layoutX="91.0" layoutY="11.0" text="PENGUIN color" textAlignment="CENTER">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="603.0" prefWidth="395.0">
+                     <children>
+                        <Button fx:id="button_red" layoutX="33.0" layoutY="142.0" mnemonicParsing="false" onAction="#changeImageAfterButton" prefHeight="60.0" prefWidth="80.0" text="Red" />
+                        <Button fx:id="button_orange" layoutX="158.0" layoutY="142.0" mnemonicParsing="false" onAction="#changeImageAfterButton" prefHeight="60.0" prefWidth="80.0" text="Orange" />
+                        <Button fx:id="button_yellow" layoutX="282.0" layoutY="142.0" mnemonicParsing="false" onAction="#changeImageAfterButton" prefHeight="60.0" prefWidth="80.0" text="Yellow" />
+                        <Button fx:id="button_green" layoutX="33.0" layoutY="235.0" mnemonicParsing="false" onAction="#changeImageAfterButton" prefHeight="60.0" prefWidth="80.0" text="Green" />
+                        <Button fx:id="button_purple" layoutX="158.0" layoutY="235.0" mnemonicParsing="false" onAction="#changeImageAfterButton" prefHeight="60.0" prefWidth="80.0" text="Purple" />
+                        <Button fx:id="button_blue" layoutX="282.0" layoutY="235.0" mnemonicParsing="false" onAction="#changeImageAfterButton" prefHeight="60.0" prefWidth="80.0" text="Black" />
+                        <Button fx:id="nextBtn" layoutX="298.0" layoutY="539.0" mnemonicParsing="false" onAction="#addNavigationHandlers" prefHeight="33.0" prefWidth="64.0" text="Next" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>
