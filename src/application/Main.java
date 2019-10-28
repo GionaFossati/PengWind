@@ -1,5 +1,6 @@
 package application;
 
+//import application.models.CharacterModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -13,13 +14,15 @@ public class Main extends Application {
 	
 	private static Stage primaryStage;
     private static Parent rootCharacterName;
-    private static Parent rootCharacterCustom;
-    private static Parent rootMazeSelect;
-    private static Parent rootMaze;
+//    private static Parent rootCharacterCustom;
+//    private static Parent rootMazeSelect;
+//    private static Parent rootMaze;
     private static Scene sceneCharacterName;
-    private static Scene sceneCharacterCustom;
-    private static Scene sceneMazeSelect;
-    private static Scene sceneMaze;
+//    private static Scene sceneCharacterCustom;
+//    private static Scene sceneMazeSelect;
+//    private static Scene sceneMaze;
+    
+    //private CharacterModel myModel;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -30,30 +33,20 @@ public class Main extends Application {
 		try {
 			
 			rootCharacterName = FXMLLoader.load(getClass().getResource("/application/views/rootCharacterName.fxml"));
-			rootCharacterCustom = FXMLLoader.load(getClass().getResource("/application/views/rootCharacterCustom.fxml"));
-			rootMazeSelect = FXMLLoader.load(getClass().getResource("/application/views/rootMazeSelect.fxml"));
-			rootMaze = FXMLLoader.load(getClass().getResource("/application/views/rootMaze.fxml"));
-			
-			sceneCharacterName = new Scene(rootCharacterName, 800, 800);
-			sceneCharacterCustom = new Scene(rootCharacterCustom, 800, 800);
-			sceneMazeSelect = new Scene(rootMazeSelect, 800, 800);
-			sceneMaze = new Scene(rootMaze, 800, 800);
-
-			
-//			Rectangle rec = new Rectangle(100,50);
-//			rec.setFill(Color.CORAL);
-//			rec.setRotate(30);
+//			rootCharacterCustom = FXMLLoader.load(getClass().getResource("/application/views/rootCharacterCustom.fxml"));
+//			rootMazeSelect = FXMLLoader.load(getClass().getResource("/application/views/rootMazeSelect.fxml"));
+//			rootMaze = FXMLLoader.load(getClass().getResource("/application/views/rootMaze.fxml"));
 //			
-//			Ellipse cir = new Ellipse(100, 50);
-//			cir.setFill(Color.AQUAMARINE);
-//			cir.setRotate(30);
+			sceneCharacterName = new Scene(rootCharacterName, 800, 800);
+//			sceneCharacterCustom = new Scene(rootCharacterCustom, 800, 800);
+//			sceneMazeSelect = new Scene(rootMazeSelect, 800, 800);
+//			sceneMaze = new Scene(rootMaze, 800, 800);
 
 			//in this ImageView
 			FlowPane root = new FlowPane();
 			
 			root.setAlignment(Pos.CENTER);
 			Scene scene = new Scene(root,400,400);
-//			root.getChildren().addAll(rec,cir);
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			goToCharacterNameScene();
@@ -63,25 +56,26 @@ public class Main extends Application {
 		}
 	}
 	
+	
     public static void goToCharacterNameScene()
     {
         primaryStage.setScene(sceneCharacterName);
     }
     
-    public static void goToCharacterCustomScene()
-    {
-        primaryStage.setScene(sceneCharacterCustom);
-    }
-    
-    public static void goToMazeSelectScene()
-    {
-        primaryStage.setScene(sceneMazeSelect);
-    }
-    
-    public static void goToMazeScene()
-    {
-        primaryStage.setScene(sceneMaze);
-    }
+//    public static void goToCharacterCustomScene()
+//    {
+//        primaryStage.setScene(sceneCharacterCustom);
+//    }
+//    
+//    public static void goToMazeSelectScene()
+//    {
+//        primaryStage.setScene(sceneMazeSelect);
+//    }
+//    
+//    public static void goToMazeScene()
+//    {
+//        primaryStage.setScene(sceneMaze);
+//    }
 	
 	public static void main(String[] args) {
 		launch(args);

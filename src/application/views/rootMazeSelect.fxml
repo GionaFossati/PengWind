@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Box?>
@@ -15,6 +16,12 @@
          <children>
             <Button fx:id="backBtn" layoutX="30.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#backClicked" text="Back" />
             <Label layoutX="100.0" layoutY="30.0" text="Player:">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="600.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="characterName" layoutX="241.0" layoutY="30.0" prefHeight="50.0" prefWidth="306.0">
                <font>
                   <Font size="40.0" />
                </font>
@@ -42,7 +49,7 @@
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <TextArea layoutX="17.0" layoutY="140.0" prefHeight="305.0" prefWidth="302.0" text="Bring the cute penguin back to her lovely&#10;family. But be aware, on the penguins journey&#10;to home, predators are roaming around,&#10;ready to make penguin steak!&#10;&#10;Protect the penguin by being the wind! You&#10;can blow the penguin towards the right&#10;direction to her parents, or blow away the&#10;predators from the penguin!" />
+                  <TextArea editable="false" layoutX="17.0" layoutY="140.0" prefHeight="305.0" prefWidth="302.0" text="Bring the cute penguin back to her lovely&#10;family. But be aware, on the penguins journey&#10;to home, predators are roaming around,&#10;ready to make penguin steak!&#10;&#10;Protect the penguin by being the wind! You&#10;can blow the penguin towards the right&#10;direction to her parents, or blow away the&#10;predators from the penguin!" />
                   <Button fx:id="startBtn" layoutX="87.0" layoutY="470.0" mnemonicParsing="false" onMouseClicked="#startClicked" prefHeight="50.0" prefWidth="163.0" text="START" />
                </children>
             </AnchorPane>
