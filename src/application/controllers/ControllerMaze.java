@@ -1,7 +1,10 @@
 package application.controllers;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
@@ -10,13 +13,22 @@ import javax.sound.sampled.TargetDataLine;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
 
 public class ControllerMaze {
 //		GamePlay Controller ˅˅˅˅
@@ -50,7 +62,7 @@ public class ControllerMaze {
 
 
 	@FXML
-	void shortcutEvent(KeyEvent event) {
+	void shortcutEvent(KeyEvent event) throws IOException {
 		System.out.println(event.getCode());
 		switch (event.getCode()) {
         case C:
@@ -68,15 +80,21 @@ public class ControllerMaze {
 
 //	function that moves penguin and enemies
 	@FXML
-	public void goOnPressed() {
+	public void goOnPressed() throws IOException {
 		movePenguin();
 //		moveEnemies();
 		btnChangeMove.setDisable(false);
+		System.out.println(getCoord(penguinUser) +"  "+ getCoord(penguinUser));
+		
+		if (Arrays.equals(getCoord(penguinUser), getCoord(icebergOne))) {
+			
+			gameOver();
+		}
 	}
 
 //	    function that triggers the change direction
 	@FXML
-	public void changeDirectionPressed() {
+	public void changeDirectionPressed() throws IOException {
 		btnChangeMove.setDisable(true);
 		System.out.println("pressed change dir");
 		btnMovement = new ArrayList<Button>();
@@ -113,6 +131,13 @@ public class ControllerMaze {
 			}
 
 			);
+			
+//			System.out.println(getCoord(penguinUser));
+//			System.out.println(getCoord(icebergOne));
+//			if (getCoord(penguinUser) == getCoord(familyGroup) || getCoord(penguinUser) == getCoord(icebergOne)
+//					|| getCoord(penguinUser) == getCoord(icebergTwo) || getCoord(penguinUser) == getCoord(familyGroup)) {
+//				gameOver();
+//		}
 		}
 	}
 
@@ -123,7 +148,7 @@ public class ControllerMaze {
 		System.out.println("can move in Y: " + Y);
 		System.out.println("can move in X: " + X);
 		
-		if (X != -1 && Y != -1 && X < 11 && Y < 8 && getNodeByRowColumnIndex(Y, X) == null) {
+		if (X != -1 && Y != -1 && X < 11 && Y < 8 /*&& getNodeByRowColumnIndex(Y, X) == null*/) {
 			response = true;
 		} else {
 			response = false;
@@ -196,6 +221,29 @@ public class ControllerMaze {
 		System.out.println(coord[0] + " " + coord[1]);
 
 		return coord;
+	}
+	
+	private void gameOver() throws IOException {
+		
+		//create the dialog box for when the game ends
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("GAME OVER");
+		alert.setContentText("what do you want to do next?");
+		ButtonType buttonRestart = new ButtonType("Play again");
+		ButtonType buttonQuit = new ButtonType("Quit");
+		alert.getButtonTypes().setAll(buttonRestart, buttonQuit);
+		
+		// event handling for restarting the game and quitting the game
+		Optional<ButtonType> buttonPressed = alert.showAndWait();
+		if (buttonPressed.get() == buttonRestart) {
+			Parent loader = FXMLLoader.load(getClass().getResource("/application/views/rootMaze.fxml"));
+			Scene sceneMaze = new Scene(loader, 800, 800);
+			Stage stage = (Stage) penguinUser.getScene().getWindow();
+			stage.setScene(sceneMaze);
+		}
+		if (buttonPressed.get() == buttonQuit) {
+			System.exit(0);
+		}
 	}
 	
 	private boolean windDetected() {
