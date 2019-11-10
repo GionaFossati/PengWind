@@ -29,7 +29,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-
 public class ControllerMaze {
 //		GamePlay Controller ˅˅˅˅
 
@@ -56,28 +55,27 @@ public class ControllerMaze {
 	private Button btnChangeMove;
 	@FXML
 	private GridPane playField;
-    @FXML
-    private Text gameStateText;
-	
+	@FXML
+	private Text gameStateText;
+
 	public Integer[] movementDirection = new Integer[2];
 	private int[] pointsAroundCell = new int[] { -1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1 };
-
 
 	@FXML
 	void shortcutEvent(KeyEvent event) throws IOException {
 		System.out.println(event.getCode());
 		switch (event.getCode()) {
-        case C:
-        	changeDirectionPressed();
+		case C:
+			changeDirectionPressed();
 			btnChangeMove.setDisable(true);
 			break;
-        case M:
-        	movePenguin();
-    		btnChangeMove.setDisable(false);
+		case M:
+			movePenguin();
+			btnChangeMove.setDisable(false);
 			break;
-        default:
-            break;
-        }
+		default:
+			break;
+		}
 	}
 
 //	function that moves penguin and enemies
@@ -86,12 +84,7 @@ public class ControllerMaze {
 		movePenguin();
 //		moveEnemies();
 		btnChangeMove.setDisable(false);
-		System.out.println(getCoord(penguinUser) +"  "+ getCoord(penguinUser));
-		
-		if (Arrays.equals(getCoord(penguinUser), getCoord(icebergOne))) {
-			
-			gameOver();
-		}
+	
 	}
 
 //	    function that triggers the change direction
@@ -135,17 +128,10 @@ public class ControllerMaze {
 			}
 
 			);
-			
-//			System.out.println(getCoord(penguinUser));
-//			System.out.println(getCoord(icebergOne));
-//			if (getCoord(penguinUser) == getCoord(familyGroup) || getCoord(penguinUser) == getCoord(icebergOne)
-//					|| getCoord(penguinUser) == getCoord(icebergTwo) || getCoord(penguinUser) == getCoord(familyGroup)) {
-//				gameOver();
-//		}
+
 		}
 	}
 
-	
 	private boolean canMove(int Y, int X) {
 		boolean response;
 //		controls if it's trying to move out of grid or if there's an iceberg in the next cell 
@@ -161,23 +147,23 @@ public class ControllerMaze {
 		return response;
 	}
 
-	public Node getNodeByRowColumnIndex (int Y, int X) {
-	    Node result = null;
-	    Integer rowIndex = 0;
-	    Integer columnIndex = 0;
-	    ObservableList<Node> children = playField.getChildren();
-	    for (Node node : children) {
-	    	
-	    	rowIndex = GridPane.getRowIndex(node) == null ? 0 : GridPane.getRowIndex(node);
-	    	columnIndex = GridPane.getColumnIndex(node) == null ? 0 : GridPane.getColumnIndex(node);
-	        
-	    	if(rowIndex == Y && columnIndex == X) {
-	            result = node;
-	            break;
-	        } 
-	    }
+	public Node getNodeByRowColumnIndex(int Y, int X) {
+		Node result = null;
+		Integer rowIndex = 0;
+		Integer columnIndex = 0;
+		ObservableList<Node> children = playField.getChildren();
+		for (Node node : children) {
 
-	    return result;
+			rowIndex = GridPane.getRowIndex(node) == null ? 0 : GridPane.getRowIndex(node);
+			columnIndex = GridPane.getColumnIndex(node) == null ? 0 : GridPane.getColumnIndex(node);
+
+			if (rowIndex == Y && columnIndex == X) {
+				result = node;
+				break;
+			}
+		}
+
+		return result;
 	}
 
 	private void removeChangeDirButtons(Integer[] pengCoord) {
@@ -186,7 +172,7 @@ public class ControllerMaze {
 		}
 	}
 
-	private void movePenguin() {
+	private void movePenguin() throws IOException {
 		Integer[] pengCoord = getCoord(penguinUser);
 
 		Integer newY = pengCoord[1] + movementDirection[1];
@@ -196,14 +182,25 @@ public class ControllerMaze {
 		System.out.println("new Y=" + newY);
 		System.out.println("Movement direction -  X: " + movementDirection[0] + " Y: " + movementDirection[1]);
 
-		if ((canMove(newY, newX) && windDetected() ) == true) {
+		if ((canMove(newY, newX) && windDetected()) == true) {
 			playField.getChildren().remove(penguinUser);
 			playField.add(penguinUser, newY, newX);
 			gameStateText.setText("Penguin Moved!! Let's continue the game!");
 
 		} else {
-			System.out.println("I don't move otherwise you will go over smth or out of grid:  " + getNodeByRowColumnIndex(newY, newX) );
+			System.out.println("I don't move otherwise you will go over smth or out of grid:  "
+					+ getNodeByRowColumnIndex(newY, newX));
 			gameStateText.setText("Better not to go in that direction! Maybe you could try change it..");
+		}
+		
+		if (Arrays.equals(getCoord(penguinUser), getCoord(sharkOne))
+				|| Arrays.equals(getCoord(penguinUser), getCoord(sharkTwo))
+				|| Arrays.equals(getCoord(penguinUser), getCoord(sharkThree))) {
+			gameOver();
+		}
+		
+		if (Arrays.equals(getCoord(penguinUser), getCoord(familyGroup))) {
+			win();
 		}
 
 	}
@@ -228,17 +225,17 @@ public class ControllerMaze {
 
 		return coord;
 	}
-	
+
 	private void gameOver() throws IOException {
-		
-		//create the dialog box for when the game ends
+
+		// create the dialog box for when the game ends
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("GAME OVER");
 		alert.setContentText("what do you want to do next?");
 		ButtonType buttonRestart = new ButtonType("Play again");
 		ButtonType buttonQuit = new ButtonType("Quit");
 		alert.getButtonTypes().setAll(buttonRestart, buttonQuit);
-		
+
 		// event handling for restarting the game and quitting the game
 		Optional<ButtonType> buttonPressed = alert.showAndWait();
 		if (buttonPressed.get() == buttonRestart) {
@@ -252,74 +249,97 @@ public class ControllerMaze {
 		}
 	}
 	
+	private void win() throws IOException {
+
+		// create the dialog box for when the game ends
+		Alert win = new Alert(AlertType.CONFIRMATION);
+		win.setTitle("You're the best!");
+		win.setContentText("You found your family!");
+		ButtonType buttonRestart = new ButtonType("Play again");
+		ButtonType buttonQuit = new ButtonType("Quit");
+		win.getButtonTypes().setAll(buttonRestart, buttonQuit);
+
+		// event handling for restarting the game and quitting the game
+		Optional<ButtonType> buttonPressed = win.showAndWait();
+		if (buttonPressed.get() == buttonRestart) {
+			Parent loader = FXMLLoader.load(getClass().getResource("/application/views/rootMaze.fxml"));
+			Scene sceneMaze = new Scene(loader, 800, 800);
+			Stage stage = (Stage) penguinUser.getScene().getWindow();
+			stage.setScene(sceneMaze);
+		}
+		if (buttonPressed.get() == buttonQuit) {
+			System.exit(0);
+		}
+	}
+
 	private boolean windDetected() {
-   	 	ByteArrayOutputStream byteArrayOutputStream;
-        TargetDataLine targetDataLine;
-        int count;
-        boolean stopCapture = false;
-        byte tempBuffer[] = new byte[3800];
-        int countzero, timeInSeconds;    
-        short convert[] = new short[tempBuffer.length];
-        boolean blowDetected = false;
-        
-        try {
-            byteArrayOutputStream = new ByteArrayOutputStream();
-            stopCapture = false;
-            timeInSeconds = 0;
-            
-            System.out.println("Starting microphone detection test...");
-            
-            while (!stopCapture) {
-                AudioFormat audioFormat = new AudioFormat(8000.0F, 16, 1, true, false);
-                DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
-                targetDataLine = (TargetDataLine) AudioSystem.getLine(dataLineInfo);
-                targetDataLine.open(audioFormat);
-                targetDataLine.start();
-                count = targetDataLine.read(tempBuffer, 0, tempBuffer.length);
-                byteArrayOutputStream.write(tempBuffer, 0, count); 
-                
-                try {
-                	
-                	// Byte Size
-                    countzero = 0;
-                    
-                    for (int i = 0; i < tempBuffer.length; i++) {                                     
-                        convert[i] = tempBuffer[i];
-                        
-                        if (convert[i] == 0) {
-                            countzero++;
-                        }
-                        
-                    }
-                     
-                   timeInSeconds++;
-                    
-                    /* Checks if lower than 800 bytes
-                     * 800 bytes is low enough volume to block out unwanted noises
-                     */
-                    if (countzero < 800) {
-                   	 	blowDetected = true;
-                   	 	System.out.println(blowDetected + ": " + countzero + " bytes detected at " + timeInSeconds + " seconds");
-                   	 	break;
-                    } 
- 
-                } catch (StringIndexOutOfBoundsException e) {
-                    System.out.println(e.getMessage());
-                    return blowDetected;
-                }
-                
-                Thread.sleep(0);
-                targetDataLine.close();
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-            return blowDetected;
-        }
-        
-        return blowDetected;
-        
-   }
-	
-	
+		ByteArrayOutputStream byteArrayOutputStream;
+		TargetDataLine targetDataLine;
+		int count;
+		boolean stopCapture = false;
+		byte tempBuffer[] = new byte[3800];
+		int countzero, timeInSeconds;
+		short convert[] = new short[tempBuffer.length];
+		boolean blowDetected = false;
+
+		try {
+			byteArrayOutputStream = new ByteArrayOutputStream();
+			stopCapture = false;
+			timeInSeconds = 0;
+
+			System.out.println("Starting microphone detection test...");
+
+			while (!stopCapture) {
+				AudioFormat audioFormat = new AudioFormat(8000.0F, 16, 1, true, false);
+				DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
+				targetDataLine = (TargetDataLine) AudioSystem.getLine(dataLineInfo);
+				targetDataLine.open(audioFormat);
+				targetDataLine.start();
+				count = targetDataLine.read(tempBuffer, 0, tempBuffer.length);
+				byteArrayOutputStream.write(tempBuffer, 0, count);
+
+				try {
+
+					// Byte Size
+					countzero = 0;
+
+					for (int i = 0; i < tempBuffer.length; i++) {
+						convert[i] = tempBuffer[i];
+
+						if (convert[i] == 0) {
+							countzero++;
+						}
+
+					}
+
+					timeInSeconds++;
+
+					/*
+					 * Checks if lower than 800 bytes 800 bytes is low enough volume to block out
+					 * unwanted noises
+					 */
+					if (countzero < 800) {
+						blowDetected = true;
+						System.out.println(
+								blowDetected + ": " + countzero + " bytes detected at " + timeInSeconds + " seconds");
+						break;
+					}
+
+				} catch (StringIndexOutOfBoundsException e) {
+					System.out.println(e.getMessage());
+					return blowDetected;
+				}
+
+				Thread.sleep(0);
+				targetDataLine.close();
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			return blowDetected;
+		}
+
+		return blowDetected;
+
+	}
 
 }
