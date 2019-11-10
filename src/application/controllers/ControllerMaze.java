@@ -257,7 +257,7 @@ public class ControllerMaze {
         TargetDataLine targetDataLine;
         int count;
         boolean stopCapture = false;
-        byte tempBuffer[] = new byte[8000];
+        byte tempBuffer[] = new byte[3800];
         int countzero, timeInSeconds;    
         short convert[] = new short[tempBuffer.length];
         boolean blowDetected = false;
