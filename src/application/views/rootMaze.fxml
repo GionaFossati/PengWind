@@ -49,44 +49,24 @@
                   <Image url="@../../../res/penguin.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="sharkOne" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="sharkThree" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="5">
                <image>
                   <Image url="@../../../res/shark.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="sharkTwo" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+            <ImageView fx:id="sharkTwo" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4">
                <image>
                   <Image url="@../../../res/shark.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="sharkFour" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="7">
+            <ImageView fx:id="sharkOne" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
                   <Image url="@../../../res/shark.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="sharkThree" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="6">
-               <image>
-                  <Image url="@../../../res/shark.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="icebergThree" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="5">
-               <image>
-                  <Image url="@../../../res/iceberg.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="icebergTwo" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4">
-               <image>
-                  <Image url="@../../../res/iceberg.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="icebergOne" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../../../res/iceberg.jpeg" />
                </image>
             </ImageView>
          </children>
       </GridPane>
-      <Button fx:id="btnGoOn" layoutX="539.0" layoutY="760.0" mnemonicParsing="false" onMouseClicked="#goOnPressed" text="Go on (M)" />
+      <Button fx:id="btnGoOn" layoutX="539.0" layoutY="760.0" mnemonicParsing="false" text="Go on (M)" />
       <Button fx:id="btnChangeMove" layoutX="329.0" layoutY="760.0" mnemonicParsing="false" onMouseClicked="#changeDirectionPressed" text="Change Move Direction (C)" />
       <Button layoutX="705.0" layoutY="759.0" mnemonicParsing="false" text="End Game" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#aeebff" height="35.0" layoutX="10.0" layoutY="10.0" stroke="#81b1ff" strokeType="INSIDE" width="300.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="5.0" />
