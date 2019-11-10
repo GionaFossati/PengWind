@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 public class ControllerMaze {
 //		GamePlay Controller ˅˅˅˅
@@ -44,6 +45,8 @@ public class ControllerMaze {
 	private Button btnChangeMove;
 	@FXML
 	private GridPane playField;
+    @FXML
+    private Text gameStateText;
 	
 	public Integer[] movementDirection = new Integer[2];
 	private int[] pointsAroundCell = new int[] { -1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1 };
@@ -58,20 +61,12 @@ public class ControllerMaze {
 			btnChangeMove.setDisable(true);
 			break;
         case M:
-        	goOnPressed();
-			btnChangeMove.setDisable(false);
+        	movePenguin();
+    		btnChangeMove.setDisable(false);
 			break;
         default:
             break;
         }
-	}
-
-//	function that moves penguin and enemies
-	@FXML
-	public void goOnPressed() {
-		movePenguin();
-//		moveEnemies();
-		btnChangeMove.setDisable(false);
 	}
 
 //	    function that triggers the change direction
@@ -79,6 +74,7 @@ public class ControllerMaze {
 	public void changeDirectionPressed() {
 		btnChangeMove.setDisable(true);
 		System.out.println("pressed change dir");
+		gameStateText.setText("Ok, now press the button in the cell you wish to go");
 		btnMovement = new ArrayList<Button>();
 
 		for (int k = 0; k < pointsAroundCell.length; k++) {
@@ -107,6 +103,7 @@ public class ControllerMaze {
 				movementDirection[0] = dy;
 				movementDirection[1] = dx;
 				removeChangeDirButtons(pengCoord);
+				gameStateText.setText("Direction Changed! Now press the M key to start moving!");
 				System.out.println(
 						"New movement direction -  X: " + movementDirection[0] + " Y: " + movementDirection[1]);
 
@@ -170,9 +167,11 @@ public class ControllerMaze {
 		if ((canMove(newY, newX) && windDetected() ) == true) {
 			playField.getChildren().remove(penguinUser);
 			playField.add(penguinUser, newY, newX);
+			gameStateText.setText("Penguin Moved!! Let's continue the game!");
 
 		} else {
 			System.out.println("I don't move otherwise you will go over smth or out of grid:  " + getNodeByRowColumnIndex(newY, newX) );
+			gameStateText.setText("Better not to go in that direction! Maybe you could try change it..");
 		}
 
 	}
