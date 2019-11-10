@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.Random;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
@@ -84,7 +85,7 @@ public class ControllerMaze {
 		movePenguin();
 //		moveEnemies();
 		btnChangeMove.setDisable(false);
-	
+
 	}
 
 //	    function that triggers the change direction
@@ -132,13 +133,17 @@ public class ControllerMaze {
 		}
 	}
 
+	private void sharkRandomMove() {
+
+	}
+
 	private boolean canMove(int Y, int X) {
 		boolean response;
 //		controls if it's trying to move out of grid or if there's an iceberg in the next cell 
 		System.out.println("can move in Y: " + Y);
 		System.out.println("can move in X: " + X);
-		
-		if (X >= 0 && Y >= 0 && X < 9 && Y < 9 /*&& getNodeByRowColumnIndex(Y, X) == null*/) {
+
+		if (X >= 0 && Y >= 0 && X < 9 && Y < 9 && getNodeByRowColumnIndex(Y, X) == null) {
 			response = true;
 		} else {
 			response = false;
@@ -192,17 +197,64 @@ public class ControllerMaze {
 					+ getNodeByRowColumnIndex(newY, newX));
 			gameStateText.setText("Better not to go in that direction! Maybe you could try change it..");
 		}
-		
+
 		if (Arrays.equals(getCoord(penguinUser), getCoord(sharkOne))
 				|| Arrays.equals(getCoord(penguinUser), getCoord(sharkTwo))
 				|| Arrays.equals(getCoord(penguinUser), getCoord(sharkThree))) {
 			gameOver();
 		}
-		
+
 		if (Arrays.equals(getCoord(penguinUser), getCoord(familyGroup))) {
 			win();
 		}
+		
+		/*moveShark(sharkOne);
+		moveShark(sharkTwo);
+		moveShark(sharkThree);*/
 
+	}
+
+	private void moveShark(ImageView shark) {
+		Integer[] sharkOneCoord = getCoord(shark);
+		
+		// start shark movement here
+		
+		ArrayList<int[]> CellOptions = new ArrayList<int[]>();
+		Random randomGenerator = new Random();
+		Integer[] sharkMovementDirection = new Integer[2];
+
+		for (int i = 0; i < pointsAroundCell.length; i++) {
+			int dy = pointsAroundCell[i];
+			int dx = pointsAroundCell[++i];
+			int newX = sharkOneCoord[1] + dx;
+			int newY = sharkOneCoord[0] + dy;
+
+			if (canMove(newY, newX)) {
+				CellOptions.add(new int[] { dy, dx });
+				System.out.println(CellOptions.size());
+				int index = randomGenerator.nextInt(CellOptions.size());
+
+				System.out.println("Random number chosen: " + index);
+
+				CellOptions.get(index);
+
+				System.out.println("Random coordinates chosen for shark: " + Arrays.toString(CellOptions.get(index)));
+
+				sharkMovementDirection[1] = dx;
+				sharkMovementDirection[0] = dy;
+
+				System.out.println("New Shark's Movement direction -  X:" + sharkMovementDirection[0] + " Y: "
+						+ sharkMovementDirection[1]);
+				
+				playField.getChildren().remove(shark);
+				playField.add(shark, newY, newX);
+			}
+
+		}
+		for (int[] array : CellOptions) {
+			System.out.println("Shark Coords: " + Arrays.toString(array));
+
+		}
 	}
 
 	private Integer[] getCoord(ImageView gridNode) {
@@ -248,7 +300,7 @@ public class ControllerMaze {
 			System.exit(0);
 		}
 	}
-	
+
 	private void win() throws IOException {
 
 		// create the dialog box for when the game ends
