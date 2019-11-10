@@ -44,7 +44,7 @@
                   <Insets />
                </GridPane.margin>
             </ImageView>
-            <ImageView fx:id="penguinUser" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="7">
+            <ImageView fx:id="penguinUser" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../res/penguin.png" />
                </image>

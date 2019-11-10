@@ -152,7 +152,7 @@ public class ControllerMaze {
 		System.out.println("can move in Y: " + Y);
 		System.out.println("can move in X: " + X);
 		
-		if (X != -1 && Y != -1 && X < 11 && Y < 8 /*&& getNodeByRowColumnIndex(Y, X) == null*/) {
+		if (X >= 0 && Y >= 0 && X <= 8 && Y <= 8 /*&& getNodeByRowColumnIndex(Y, X) == null*/) {
 			response = true;
 		} else {
 			response = false;
