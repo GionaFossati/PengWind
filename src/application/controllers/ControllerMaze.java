@@ -100,7 +100,7 @@ public class ControllerMaze {
 
 			if (canMove(newY, newX)) {
 				playField.add(btnMovement.get(i), newX, newY);
-				playField.setHalignment(btnMovement.get(i), HPos.CENTER);
+				GridPane.setHalignment(btnMovement.get(i), HPos.CENTER);
 			}
 
 			btnMovement.get(i).setOnMouseClicked(e -> {
