@@ -15,9 +15,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="800.0" maxWidth="800.0" onKeyPressed="#shortcutEvent" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ControllerMaze">
+<AnchorPane maxHeight="800.0" maxWidth="800.0" onKeyPressed="#shortcutEvent" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ControllerMaze">
    <children>
-      <GridPane fx:id="playField" gridLinesVisible="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="629.0" fitWidth="717.0" layoutX="42.0" layoutY="92.0" opacity="0.52" pickOnBounds="true" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="92.0">
+         <image>
+            <Image url="@../images/seabackground.jpg" />
+         </image>
+      </ImageView>
+      <GridPane fx:id="playField" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -40,7 +45,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="familyGroup" fitHeight="150.0" fitWidth="177.0" pickOnBounds="true" preserveRatio="true" translateX="-80.0" translateY="6.0" GridPane.columnIndex="8" GridPane.rowIndex="7">
+            <ImageView fx:id="familyGroup" fitHeight="150.0" fitWidth="177.0" pickOnBounds="true" preserveRatio="true" translateX="-92.0" translateY="-13.0" GridPane.columnIndex="8" GridPane.rowIndex="7">
                <image>
                   <Image url="@../images/family.png" />
                </image>
@@ -53,28 +58,31 @@
                   <Image url="@../images/penguin.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="sharkThree" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="5">
+            <ImageView fx:id="sharkThree" fitHeight="150.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                <image>
                   <Image url="@../images/shark.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="sharkTwo" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4">
+            <ImageView fx:id="sharkTwo" fitHeight="150.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                <image>
                   <Image url="@../images/shark.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="sharkOne" fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <ImageView fx:id="sharkOne" fitHeight="150.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                <image>
                   <Image url="@../images/shark.png" />
                </image>
             </ImageView>
          </children>
       </GridPane>
-      <Button fx:id="btnGoOn" layoutX="539.0" layoutY="760.0" mnemonicParsing="false" text="Go on (M)" />
-      <Button fx:id="btnChangeMove" layoutX="329.0" layoutY="760.0" mnemonicParsing="false" onMouseClicked="#changeDirectionPressed" text="Change Move Direction (C)" />
-      <Button layoutX="705.0" layoutY="759.0" mnemonicParsing="false" text="End Game" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#aeebff" height="35.0" layoutX="10.0" layoutY="10.0" stroke="#81b1ff" strokeType="INSIDE" width="300.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="5.0" />
-      <Text fx:id="gameStateText" fill="#111111" layoutX="16.0" layoutY="777.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press C to set the movement direction" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="16.0" />
+      <Button fx:id="btnGoOn" layoutX="426.0" layoutY="741.0" mnemonicParsing="false" text="Go on (M)" AnchorPane.bottomAnchor="30.0" />
+      <Button fx:id="btnChangeMove" layoutX="210.0" layoutY="743.0" mnemonicParsing="false" onMouseClicked="#changeDirectionPressed" text="Change Move Direction (C)" AnchorPane.bottomAnchor="30.0" />
+      <Button layoutX="743.0" layoutY="742.0" mnemonicParsing="false" text="End Game" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="30.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00c8ff29" height="54.0" layoutX="82.0" layoutY="34.0" stroke="#245ebc" strokeType="INSIDE" width="666.0" AnchorPane.bottomAnchor="728.0" AnchorPane.leftAnchor="82.0" />
+      <Text fx:id="gameStateText" fill="#111111" layoutX="103.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press C to set the movement direction" textAlignment="CENTER" AnchorPane.bottomAnchor="743.78125" AnchorPane.leftAnchor="103.0">
+         <font>
+            <Font size="20.0" />
+         </font></Text>
       <Text fx:id="blowText" opacity="0.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="11.0" text="Blow now !" AnchorPane.leftAnchor="209.0" AnchorPane.topAnchor="200.0">
          <font>
             <Font size="81.0" />
