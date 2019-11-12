@@ -229,6 +229,7 @@ public class ControllerMaze implements Initializable {
 	}
 
 	private void moveShark(ImageView shark) {
+		Integer[] sharkCoord = getCoord(shark);
 		int newX = 0;
 		int newY = 0;
 		int dx = 0;
@@ -260,8 +261,8 @@ public class ControllerMaze implements Initializable {
 
 		System.out.println("Random coordinates chosen for shark: " + Arrays.toString(CellOptions.get(index)));
 
-		sharkMovementDirection[1] = CellOptions.get(index)[1];
-		sharkMovementDirection[0] = CellOptions.get(index)[0];
+		sharkMovementDirection[1] = CellOptions.get(index)[0];
+		sharkMovementDirection[0] = CellOptions.get(index)[1];
 
 		System.out.println("New Shark's Movement direction -  X:" + sharkMovementDirection[0] + " Y: "
 				+ sharkMovementDirection[1]);
