@@ -208,9 +208,9 @@ public class ControllerMaze {
 			win();
 		}
 		
-		/*moveShark(sharkOne);
+		moveShark(sharkOne);
 		moveShark(sharkTwo);
-		moveShark(sharkThree);*/
+		moveShark(sharkThree);
 
 	}
 
