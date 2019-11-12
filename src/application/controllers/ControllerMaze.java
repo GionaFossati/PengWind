@@ -2,19 +2,23 @@ package application.controllers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Random;
+import java.util.ResourceBundle;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.TargetDataLine;
 
+import application.models.CharacterModel;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -23,6 +27,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -30,14 +35,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ControllerMaze {
+public class ControllerMaze implements Initializable {
 //		GamePlay Controller ˅˅˅˅
+	
+	CharacterModel m = new CharacterModel();
 
 	private ArrayList<Button> btnMovement;
 	@FXML
 	private ImageView familyGroup;
 	@FXML
 	private ImageView penguinUser;
+	private Image chosenCharacter = m.getImage();
 	@FXML
 	private ImageView sharkOne;
 	@FXML
@@ -392,6 +400,12 @@ public class ControllerMaze {
 
 		return blowDetected;
 
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		penguinUser.setImage(chosenCharacter);
+		
 	}
 
 }
