@@ -36,13 +36,13 @@
          <children>
             <ImageView fitHeight="90.0" fitWidth="199.0" layoutX="31.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="27.164283752441406" AnchorPane.topAnchor="660.0">
                <image>
-                  <Image url="@../../../bin/backbutton.png" />
+                  <Image url="@../images/backbutton.png" />
                </image>
             </ImageView>
             <Button fx:id="backBtn" alignment="BOTTOM_CENTER" layoutX="45.0" layoutY="666.0" mnemonicParsing="false" onMouseClicked="#backClicked" opacity="0.0" prefHeight="63.0" prefWidth="172.0" AnchorPane.topAnchor="666.0" />
             <ImageView fitHeight="90.0" fitWidth="199.0" layoutX="578.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../bin/nextbutton.png" />
+                  <Image url="@../images/nextbutton.png" />
                </image>
             </ImageView>
             <Button fx:id="nextBtn" layoutX="593.0" layoutY="665.0" mnemonicParsing="false" onMouseClicked="#nextClicked" opacity="0.0" prefHeight="64.0" prefWidth="168.0" text="Next" />
