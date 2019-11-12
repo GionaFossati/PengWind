@@ -223,11 +223,12 @@ public class ControllerMaze implements Initializable {
 	}
 
 	private void moveShark(ImageView shark) {
+		Integer[] sharkCoord = getCoord(shark);
 		int newX = 0;
 		int newY = 0;
 		int dx = 0;
 		int dy = 0;
-		Integer[] sharkOneCoord = getCoord(shark);
+
 		
 		// start shark movement here
 		
@@ -255,22 +256,24 @@ public class ControllerMaze implements Initializable {
 
 		System.out.println("Random coordinates chosen for shark: " + Arrays.toString(CellOptions.get(index)));
 
-		sharkMovementDirection[1] = CellOptions.get(index)[1];
-		sharkMovementDirection[0] = CellOptions.get(index)[0];
+		sharkMovementDirection[1] = CellOptions.get(index)[0];
+		sharkMovementDirection[0] = CellOptions.get(index)[1];
 
-		System.out.println("New Shark's Movement direction -  X:" + sharkMovementDirection[0] + " Y: "
-				+ sharkMovementDirection[1]);
+
 		
-		newX = sharkOneCoord[1] + sharkMovementDirection[1];
-		newY = sharkOneCoord[0] + sharkMovementDirection[0];
+		newX = sharkCoord[1] + sharkMovementDirection[0];
+		newY = sharkCoord[0] + sharkMovementDirection[1];
+		
+		System.out.println("New Shark's Movement direction -  X:" + newX + " Y: "
+				+ newY);
 		playField.getChildren().remove(shark);
 		playField.add(shark, newY, newX);
 		
 		
-		for (int[] array : CellOptions) {
-			System.out.println("Shark Coords: " + Arrays.toString(array));
-
-		}
+//		for (int[] array : CellOptions) {
+//			System.out.println("Shark Coords: " + Arrays.toString(array));
+//
+//		}
 	}
 
 	private Integer[] getCoord(ImageView gridNode) {
