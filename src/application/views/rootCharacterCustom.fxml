@@ -66,7 +66,7 @@
             <Button fx:id="button_yellow" layoutX="420.0" layoutY="540.0" mnemonicParsing="false" onAction="#changeImageAfterButton" opacity="0.0" prefHeight="94.0" prefWidth="80.0" text="Yellow" />
             <ImageView fitHeight="86.0" fitWidth="59.0" layoutX="338.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/green.png" />
+                  <Image url="@../images/GREEN.png" />
                </image>
             </ImageView>
             <Button fx:id="button_green" layoutX="327.0" layoutY="537.0" mnemonicParsing="false" onAction="#changeImageAfterButton" opacity="0.0" prefHeight="100.0" prefWidth="81.0" text="Green" />
