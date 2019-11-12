@@ -131,8 +131,8 @@ public class ControllerMaze implements Initializable {
 				movementDirection[1] = dx;
 				removeChangeDirButtons(pengCoord);
 				gameStateText.setText("Direction Changed! Now press the M key to start moving!");
-				System.out.println(
-						"New movement direction -  X: " + movementDirection[0] + " Y: " + movementDirection[1]);
+				//System.out.println(
+				//"New movement direction -  X: " + movementDirection[0] + " Y: " + movementDirection[1]);
 
 			}
 
@@ -148,10 +148,10 @@ public class ControllerMaze implements Initializable {
 	private boolean canMove(int Y, int X) {
 		boolean response;
 //		controls if it's trying to move out of grid or if there's an iceberg in the next cell 
-		System.out.println("can move in Y: " + Y);
-		System.out.println("can move in X: " + X);
+		//System.out.println("can move in Y: " + Y);
+		//System.out.println("can move in X: " + X);
 
-		if (X >= 0 && Y >= 0 && X < 9 && Y < 9 && getNodeByRowColumnIndex(Y, X) == null) {
+		if (X >= 0 && Y >= 0 && X < 9 && Y < 9 /*&& getNodeByRowColumnIndex(Y, X) == null*/) {
 			response = true;
 		} else {
 			response = false;
@@ -191,9 +191,9 @@ public class ControllerMaze implements Initializable {
 		Integer newY = pengCoord[1] + movementDirection[1];
 		Integer newX = pengCoord[0] + movementDirection[0];
 
-		System.out.println("new X=" + newX);
-		System.out.println("new Y=" + newY);
-		System.out.println("Movement direction -  X: " + movementDirection[0] + " Y: " + movementDirection[1]);
+		//System.out.println("new X=" + newX);
+		//System.out.println("new Y=" + newY);
+		//System.out.println("Movement direction -  X: " + movementDirection[0] + " Y: " + movementDirection[1]);
 
 		if ((canMove(newY, newX) && windDetected()) == true) {
 			playField.getChildren().remove(penguinUser);
@@ -201,8 +201,8 @@ public class ControllerMaze implements Initializable {
 			gameStateText.setText("Penguin Moved!! Let's continue the game!");
 
 		} else {
-			System.out.println("I don't move otherwise you will go over smth or out of grid:  "
-					+ getNodeByRowColumnIndex(newY, newX));
+		//	System.out.println("I don't move otherwise you will go over smth or out of grid:  "
+		//			+ getNodeByRowColumnIndex(newY, newX));
 			gameStateText.setText("Better not to go in that direction! Maybe you could try change it..");
 		}
 
@@ -217,12 +217,16 @@ public class ControllerMaze implements Initializable {
 		}
 		
 		moveShark(sharkOne);
-		moveShark(sharkTwo);
-		moveShark(sharkThree);
+		//moveShark(sharkTwo);
+		//moveShark(sharkThree);
 
 	}
 
 	private void moveShark(ImageView shark) {
+		int newX = 0;
+		int newY = 0;
+		int dx = 0;
+		int dy = 0;
 		Integer[] sharkOneCoord = getCoord(shark);
 		
 		// start shark movement here
@@ -232,33 +236,37 @@ public class ControllerMaze implements Initializable {
 		Integer[] sharkMovementDirection = new Integer[2];
 
 		for (int i = 0; i < pointsAroundCell.length; i++) {
-			int dy = pointsAroundCell[i];
-			int dx = pointsAroundCell[++i];
-			int newX = sharkOneCoord[1] + dx;
-			int newY = sharkOneCoord[0] + dy;
+			dy = pointsAroundCell[i];
+			dx = pointsAroundCell[++i];
 
 			if (canMove(newY, newX)) {
 				CellOptions.add(new int[] { dy, dx });
-				System.out.println(CellOptions.size());
-				int index = randomGenerator.nextInt(CellOptions.size());
-
-				System.out.println("Random number chosen: " + index);
-
-				CellOptions.get(index);
-
-				System.out.println("Random coordinates chosen for shark: " + Arrays.toString(CellOptions.get(index)));
-
-				sharkMovementDirection[1] = dx;
-				sharkMovementDirection[0] = dy;
-
-				System.out.println("New Shark's Movement direction -  X:" + sharkMovementDirection[0] + " Y: "
-						+ sharkMovementDirection[1]);
 				
-				playField.getChildren().remove(shark);
-				playField.add(shark, newY, newX);
 			}
 
+				
 		}
+		System.out.println(CellOptions.size());
+		int index = randomGenerator.nextInt(CellOptions.size());
+
+		System.out.println("Random number chosen: " + index);
+
+		CellOptions.get(index);
+
+		System.out.println("Random coordinates chosen for shark: " + Arrays.toString(CellOptions.get(index)));
+
+		sharkMovementDirection[1] = CellOptions.get(index)[1];
+		sharkMovementDirection[0] = CellOptions.get(index)[0];
+
+		System.out.println("New Shark's Movement direction -  X:" + sharkMovementDirection[0] + " Y: "
+				+ sharkMovementDirection[1]);
+		
+		newX = sharkOneCoord[1] + sharkMovementDirection[1];
+		newY = sharkOneCoord[0] + sharkMovementDirection[0];
+		playField.getChildren().remove(shark);
+		playField.add(shark, newY, newX);
+		
+		
 		for (int[] array : CellOptions) {
 			System.out.println("Shark Coords: " + Arrays.toString(array));
 
@@ -281,7 +289,7 @@ public class ControllerMaze implements Initializable {
 			coord[0] = 0;
 		}
 
-		System.out.println(coord[0] + " " + coord[1]);
+		//System.out.println(coord[0] + " " + coord[1]);
 
 		return coord;
 	}
@@ -380,8 +388,8 @@ public class ControllerMaze implements Initializable {
 					 */
 					if (countzero < 800) {
 						blowDetected = true;
-						System.out.println(
-								blowDetected + ": " + countzero + " bytes detected at " + timeInSeconds + " seconds");
+						//System.out.println(
+						//		blowDetected + ": " + countzero + " bytes detected at " + timeInSeconds + " seconds");
 						break;
 					}
 
